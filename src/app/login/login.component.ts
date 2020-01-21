@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import{FormGroup,FormControl,FormBuilder,Validators,AbstractControl} from '@angular/forms';
 import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 UserService
 @Component({
   selector: 'app-login',
@@ -13,7 +14,8 @@ export class LoginComponent implements OnInit {
   pswd: AbstractControl;
   constructor(
     private formbuilder: FormBuilder,
-    private usersevice: UserService
+    private usersevice: UserService,
+    private router: Router,
   ) {
     this.loginform = formbuilder.group({
       email: ['',[Validators.required, Validators.pattern(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i)]],
@@ -33,9 +35,14 @@ export class LoginComponent implements OnInit {
         pswd: this.loginform.value.pswd
       }
       console.log('my data prepared',senData);
-      this.usersevice.login(senData);
-    }else{
-
+      let data = this.usersevice.login(senData);
+      if(data == true){
+        this.usersevice.alertForSuccess("You Have Successfully Logged In","Success");
+        this.router.navigate(['about']);
+      }
+      else{
+        this.usersevice.alertFordanger("Credentials Not Matching","Warning!");
+      }
     }
   }
 }
