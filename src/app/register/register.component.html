@@ -1,1 +1,27 @@
 <p class="def">REGISTER</p>
+<form [formGroup]="registerform" (ngSubmit)="registration()">
+  <div class="container">
+    <div class="form-group">
+      <label for="Name">Name:</label>
+      <input type="text" class="form-control" placeholder="Enter Name" formControlName="name" id="email">
+    <br>
+      <label for="pwd">Gender:</label>
+      <div>
+        <input type="radio" value=" male " formControlName="gender" id="email">Male
+        <input type="radio" value=" female "formControlName="gender" id="email">Female
+      </div> 
+      <br>
+        <label for="pwd">Email:</label>
+        <input type="email" class="form-control" placeholder="Enter email" formControlName="email" id="pwd">
+      <br>
+        <label for="pwd">Password:</label>
+        <input type="password" class="form-control col-md-4" id="pwd" placeholder="Enter password" formControlName="pswd">
+      </div>
+      <br>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+<div class="container">
+<br>
+<button class ="btn btn-success" routerLink='/login'>Login</button>
+</div>
